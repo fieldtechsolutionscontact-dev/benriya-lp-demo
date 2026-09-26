@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>リアルタイムプレビュー付きLP生成エディタ</title>
+  <title>画像アップロード対応・リアルタイムLP生成エディタ</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -65,14 +65,21 @@
       color: #334155;
     }
     .form-group input[type="text"],
-    .form-group textarea {
+    .form-group textarea,
+    .form-group input[type="file"] {
       width: 100%;
       padding: 8px 11px;
       border: 1px solid #cbd5e1;
       border-radius: 6px;
       font-size: 0.85rem;
       color: #0f172a;
+      background: #ffffff;
       transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-group input[type="file"] {
+      padding: 6px;
+      font-size: 0.78rem;
+      cursor: pointer;
     }
     .form-group input[type="text"]:focus,
     .form-group textarea:focus {
@@ -86,7 +93,7 @@
       line-height: 1.5;
     }
 
-    /* テーマカラー切り替えラジオボタン */
+    /* テーマカラー選択ボタン */
     .color-options {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -123,7 +130,6 @@
       color: #1e40af;
     }
 
-    /* 複数行グループ */
     .row-group {
       display: flex;
       gap: 8px;
@@ -135,15 +141,15 @@
     .card-inputs {
       background: #f8fafc;
       border: 1px solid #e2e8f0;
-      padding: 10px;
+      padding: 12px;
       border-radius: 8px;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
     }
     .card-inputs-title {
       font-size: 0.78rem;
       font-weight: 700;
       color: #64748b;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     /* 保存ボタン */
@@ -217,10 +223,10 @@
 </head>
 <body>
 
-  <!-- 左側：入力設定パネル -->
+  <!-- 左ペイン：設定フォーム -->
   <div id="editor-pane">
     <div id="editor-header">
-      <span>LP生成エディタ</span>
+      <span>LP生成エディタ（画像対応）</span>
       <span style="font-size:0.75rem; font-weight:normal; opacity:0.8;">リアルタイム自動連動</span>
     </div>
     <div id="editor-form">
@@ -279,18 +285,22 @@
         </div>
       </div>
 
-      <!-- 4. スタッフ紹介設定 -->
+      <!-- 4. スタッフ紹介 -->
       <div class="form-section-title">4. スタッフ紹介設定</div>
+      <div class="form-group">
+        <label>スタッフ顔写真を選択</label>
+        <input type="file" id="staffImgFile" accept="image/*">
+      </div>
       <div class="form-group">
         <label>スタッフ肩書・お名前</label>
         <input type="text" id="staffName" value="店長・女性スタッフ一同">
       </div>
       <div class="form-group">
         <label>一言メッセージ</label>
-        <textarea id="staffMsg">「どんな人が来るんだろう…」というお客様の不安を解消するため、身だしなみのチェック、靴下の履き替え、丁寧な言葉遣いと笑顔でのご対応を徹底しております。男性スタッフだけのご訪問が不安な女性やシニアの方も、どうぞ安心してお任せください。</textarea>
+        <textarea id="staffMsg">身だしなみのチェック、靴下の履き替え、丁寧な言葉遣いと笑顔でのご対応を徹底しております。男性スタッフだけのご訪問が不安な女性やシニアの方も、どうぞ安心してお任せください。</textarea>
       </div>
 
-      <!-- 5. 料金メニュー設定 -->
+      <!-- 5. 料金メニュー -->
       <div class="form-section-title">5. 料金メニュー設定（最大5件）</div>
       <div class="form-group">
         <div class="row-group">
@@ -315,14 +325,24 @@
         </div>
       </div>
 
-      <!-- 6. ビフォーアフター設定 -->
-      <div class="form-section-title">6. 作業実績・事例設定（2件）</div>
+      <!-- 6. ビフォーアフター -->
+      <div class="form-section-title">6. 作業実績・ビフォーアフター設定（2件）</div>
       <div class="card-inputs">
         <div class="card-inputs-title">【事例 1】</div>
         <div class="form-group">
+          <label>Before写真選択</label>
+          <input type="file" id="ba1_beforeFile" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label>After写真選択</label>
+          <input type="file" id="ba1_afterFile" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label>作業タイトル</label>
           <input type="text" id="ba1_title" value="不用品お片付け・お部屋整理">
         </div>
         <div class="form-group">
+          <label>解説文</label>
           <textarea id="ba1_desc">散らかっていたお部屋も、作業時間約2時間ですっきり元通り。不用品の分別から搬出まで全て対応いたしました。</textarea>
         </div>
         <div class="row-group">
@@ -334,9 +354,19 @@
       <div class="card-inputs">
         <div class="card-inputs-title">【事例 2】</div>
         <div class="form-group">
+          <label>Before写真選択</label>
+          <input type="file" id="ba2_beforeFile" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label>After写真選択</label>
+          <input type="file" id="ba2_afterFile" accept="image/*">
+        </div>
+        <div class="form-group">
+          <label>作業タイトル</label>
           <input type="text" id="ba2_title" value="水回り清掃・キッチンクリーニング">
         </div>
         <div class="form-group">
+          <label>解説文</label>
           <textarea id="ba2_desc">長年の油汚れや焦げ付きも、専用洗剤とプロの技術でピカピカに。清潔感のある明るいキッチンを取り戻しました。</textarea>
         </div>
         <div class="row-group">
@@ -345,7 +375,7 @@
         </div>
       </div>
 
-      <!-- 7. お客様の声設定 -->
+      <!-- 7. お客様の声 -->
       <div class="form-section-title">7. お客様の声設定（3件）</div>
       <div class="card-inputs">
         <div class="card-inputs-title">【声 1】</div>
@@ -385,19 +415,26 @@
     </div>
   </div>
 
-  <!-- 右側：リアルタイムプレビュー枠 -->
+  <!-- 右ペイン：リアルタイムプレビュー -->
   <div id="preview-pane">
     <div id="preview-header">
       <span class="preview-badge">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
         リアルタイムプレビュー中
       </span>
-      <span>※フォームの編集が即座に反映されます</span>
+      <span>※文字や画像の変更が即座に反映されます</span>
     </div>
     <iframe id="preview-frame"></iframe>
   </div>
 
   <script>
+    // Base64画像保持用変数
+    let staffImgBase64 = '';
+    let ba1_beforeBase64 = '';
+    let ba1_afterBase64 = '';
+    let ba2_beforeBase64 = '';
+    let ba2_afterBase64 = '';
+
     // テーマカラーパレット定義
     const colorPalettes = {
       orange: {
@@ -429,7 +466,31 @@
       return escapeHtml(str).replace(/\n/g, '<br>');
     }
 
-    // 完成版HTML文字列を生成
+    // ファイル選択時のBase64読み込み処理
+    function handleFileSelect(inputId, callback) {
+      const el = document.getElementById(inputId);
+      if (!el) return;
+      el.addEventListener('change', function(e) {
+        const file = e.target.files;
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(evt) {
+            callback(evt.target.result);
+            updatePreview();
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // 各ファイルインプットのバインド
+    handleFileSelect('staffImgFile', data => { staffImgBase64 = data; });
+    handleFileSelect('ba1_beforeFile', data => { ba1_beforeBase64 = data; });
+    handleFileSelect('ba1_afterFile', data => { ba1_afterBase64 = data; });
+    handleFileSelect('ba2_beforeFile', data => { ba2_beforeBase64 = data; });
+    handleFileSelect('ba2_afterFile', data => { ba2_afterBase64 = data; });
+
+    // 完成版HTML文字列の生成
     function generateLP() {
       const name = escapeHtml(document.getElementById('shopName').value.trim() || '街のまごころ便利屋');
       const mainCatch = formatText(document.getElementById('mainCatch').value.trim() || 'お部屋の「困った」を\n笑顔と安心で即解決');
@@ -482,6 +543,14 @@
       const v3_title = escapeHtml(document.getElementById('v3_title').value.trim());
       const v3_text = escapeHtml(document.getElementById('v3_text').value.trim());
 
+      // 画像プレースホルダーHTMLのヘルパー
+      function renderImage(base64Data, placeholderClass, defaultText) {
+        if (base64Data) {
+          return `<img src="${base64Data}" alt="Uploaded Image" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">`;
+        }
+        return `<div class="img-placeholder ${placeholderClass}">${defaultText}</div>`;
+      }
+
       return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -512,7 +581,7 @@
       padding-bottom: 75px;
     }
 
-    /* プレースホルダーCSSクラス定義 */
+    /* 画像プレースホルダーCSSクラス定義 */
     .img-placeholder {
       background-color: #e2e8f0;
       display: flex;
@@ -522,6 +591,7 @@
       font-weight: bold;
       font-size: 0.85rem;
       border: 2px dashed #cbd5e1;
+      overflow: hidden;
     }
     .staff-img { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 12px; }
     .ba-img { width: 100%; height: 160px; border-radius: 8px; margin-bottom: 6px; }
@@ -681,6 +751,13 @@
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
+    .staff-img-box {
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      overflow: hidden;
+    }
     .staff-tag {
       display: inline-block;
       background: var(--primary-light);
@@ -802,6 +879,12 @@
       gap: 10px;
       margin-bottom: 12px;
     }
+    .ba-photo-box {
+      width: 100%;
+      height: 160px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
     .ba-desc {
       font-size: 0.82rem;
       color: var(--text-main);
@@ -852,7 +935,7 @@
       line-height: 1.6;
     }
 
-    /* ごご利用の流れ */
+    /* ご利用の流れ */
     .flow-step {
       display: flex;
       align-items: flex-start;
@@ -1002,12 +1085,14 @@
     </div>
   </section>
 
-  <!-- 4. スタッフ紹介（顔写真枠） -->
+  <!-- 4. スタッフ紹介 -->
   <section class="container" style="padding-top: 0;">
     <h2 class="section-title">スタッフ紹介・ご挨拶</h2>
     <p class="section-desc">私たちが責任を持って伺います</p>
     <div class="staff-card">
-      <div class="img-placeholder staff-img">[スタッフ顔写真]</div>
+      <div class="staff-img-box">
+        ${renderImage(staffImgBase64, 'staff-img', '[スタッフ顔写真]')}
+      </div>
       <span class="staff-tag">清潔感・丁寧な言葉遣いを徹底</span>
       <h3 class="staff-name">${staffName}</h3>
       <p class="staff-message">${staffMsg}</p>
@@ -1078,11 +1163,11 @@
       <div class="ba-card">
         <div class="ba-card-title">${ba1_title}</div>
         <div class="ba-photos">
-          <div>
-            <div class="img-placeholder ba-img">[Before]</div>
+          <div class="ba-photo-box">
+            ${renderImage(ba1_beforeBase64, 'ba-img', '[Before]')}
           </div>
-          <div>
-            <div class="img-placeholder ba-img">[After]</div>
+          <div class="ba-photo-box">
+            ${renderImage(ba1_afterBase64, 'ba-img', '[After]')}
           </div>
         </div>
         <p class="ba-desc">${ba1_desc}</p>
@@ -1096,11 +1181,11 @@
       <div class="ba-card">
         <div class="ba-card-title">${ba2_title}</div>
         <div class="ba-photos">
-          <div>
-            <div class="img-placeholder ba-img">[Before]</div>
+          <div class="ba-photo-box">
+            ${renderImage(ba2_beforeBase64, 'ba-img', '[Before]')}
           </div>
-          <div>
-            <div class="img-placeholder ba-img">[After]</div>
+          <div class="ba-photo-box">
+            ${renderImage(ba2_afterBase64, 'ba-img', '[After]')}
           </div>
         </div>
         <p class="ba-desc">${ba2_desc}</p>
@@ -1207,7 +1292,7 @@
 </html>`;
     }
 
-    // プレビューの即時更新処理
+    // プレビューの即時更新
     function updatePreview() {
       const iframe = document.getElementById('preview-frame');
       const doc = iframe.contentWindow.document;
@@ -1216,7 +1301,7 @@
       doc.close();
     }
 
-    // 入力内容を埋め込んだ index.html の保存・ダウンロード処理
+    // index.htmlの直接保存
     function downloadLP() {
       const htmlContent = generateLP();
       const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8;' });
@@ -1230,8 +1315,8 @@
       URL.revokeObjectURL(url);
     }
 
-    // 入力フォーム変更の即時連動イベントリスナー設定
-    document.querySelectorAll('#editor-form input, #editor-form textarea').forEach(element => {
+    // フォーム入力変更のリアルタイム検知
+    document.querySelectorAll('#editor-form input:not([type="file"]), #editor-form textarea').forEach(element => {
       element.addEventListener('input', updatePreview);
       element.addEventListener('change', updatePreview);
     });
