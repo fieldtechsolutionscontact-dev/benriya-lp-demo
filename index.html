@@ -16,8 +16,6 @@
       --text-main: #2d2d2d;
       --text-sub: #666666;
       --border-color: #f0eae1;
-      --placeholder-bg: #f3ece2;
-      --placeholder-border: #d0c2b2;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -29,6 +27,20 @@
       line-height: 1.6;
       padding-bottom: 75px;
     }
+
+    /* プレースホルダーCSSクラス定義 */
+    .img-placeholder {
+      background-color: #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      font-weight: bold;
+      font-size: 0.85rem;
+      border: 2px dashed #cbd5e1;
+    }
+    .staff-img { width: 140px; height: 140px; border-radius: 50%; margin: 0 auto 12px; }
+    .ba-img { width: 100%; height: 160px; border-radius: 8px; margin-bottom: 6px; }
 
     /* ヘッダー */
     header {
@@ -176,43 +188,15 @@
       line-height: 1.5;
     }
 
-    /* 【追加1】スタッフ紹介ブロック */
+    /* スタッフ紹介ブロック */
     .staff-card {
       background: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: 16px;
       padding: 25px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
+      text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
-    @media (min-width: 600px) {
-      .staff-card {
-        flex-direction: row;
-        text-align: left;
-        align-items: flex-start;
-      }
-    }
-    .staff-avatar-frame {
-      width: 170px;
-      height: 170px;
-      border-radius: 50%;
-      background: var(--placeholder-bg);
-      border: 4px solid #ffffff;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-      overflow: hidden;
-      flex-shrink: 0;
-      position: relative;
-    }
-    .staff-avatar-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .staff-info { flex: 1; }
     .staff-tag {
       display: inline-block;
       background: var(--primary-light);
@@ -221,7 +205,7 @@
       border-radius: 12px;
       font-size: 0.78rem;
       font-weight: bold;
-      margin-bottom: 8px;
+      margin-bottom: 12px;
     }
     .staff-name {
       font-size: 1.15rem;
@@ -233,21 +217,8 @@
       font-size: 0.86rem;
       color: var(--text-sub);
       line-height: 1.6;
-      margin-bottom: 12px;
-    }
-    .staff-commitments {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .commitment-pill {
-      background: #f7f7f7;
-      border: 1px solid #e0e0e0;
-      color: #555555;
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 500;
+      max-width: 580px;
+      margin: 0 auto;
     }
 
     /* 他社比較表 */
@@ -318,7 +289,7 @@
       font-size: 1.05rem;
     }
 
-    /* 【追加2】作業実績・ビフォーアフターブロック */
+    /* 作業実績・ビフォーアフター */
     .ba-grid {
       display: grid;
       grid-template-columns: 1fr;
@@ -347,35 +318,6 @@
       gap: 10px;
       margin-bottom: 12px;
     }
-    .photo-frame {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      background: var(--placeholder-bg);
-      border: 1px dashed var(--placeholder-border);
-      border-radius: 8px;
-      overflow: hidden;
-      position: relative;
-    }
-    .photo-frame img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    .photo-label {
-      position: absolute;
-      top: 6px;
-      left: 6px;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-size: 0.7rem;
-      font-weight: bold;
-      color: #ffffff;
-      z-index: 2;
-    }
-    .label-before { background: #64748b; }
-    .label-after { background: var(--primary); }
-
     .ba-desc {
       font-size: 0.82rem;
       color: var(--text-main);
@@ -534,7 +476,7 @@
   <section class="hero">
     <div class="badge">地域密着型 / 女性スタッフ在籍</div>
     <h1>お部屋の「困った」を<br><span>笑顔と安心</span>で即解決</h1>
-    <p>「知らない人を家にあげるのが不安…」「追加料金が心配…」<br>そんなお悩みに寄り添う、女性・シニア層に優しい地域密着サービスです。</p>
+    <p>「知らない人を家にあげるのが不安…」「料金の不透明さが心配…」<br>そんなお悩みに寄り添う、女性・シニア層に優しい地域密着サービスです。</p>
     <div class="cta-container" id="contact">
       <a href="https://line.me" target="_blank" class="btn btn-line">
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.92 2 10.75c0 2.92 1.64 5.51 4.19 7.02l-.65 2.4c-.11.41.31.76.68.56l2.97-1.57c.89.26 1.83.4 2.81.4 5.52 0 10-3.92 10-8.76S17.52 2 12 2z"/></svg>
@@ -576,29 +518,21 @@
     </div>
   </section>
 
-  <!-- 【新規追加1】スタッフ紹介（安心の顔写真枠） -->
+  <!-- 4. スタッフ紹介（顔写真枠） -->
   <section class="container" style="padding-top: 0;">
+    <h2 class="section-title">スタッフ紹介・ご挨拶</h2>
+    <p class="section-desc">私たちが責任を持って伺います</p>
     <div class="staff-card">
-      <div class="staff-avatar-frame">
-        <!-- 【画像差し替え箇所】自店のスタッフ顔写真のファイルパス（例: src="images/staff.jpg"）を指定してください -->
-        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f3ece2'/><circle cx='100' cy='75' r='35' fill='%23d0c2b2'/><path d='M40 165 C40 125, 160 125, 160 165 Z' fill='%23d0c2b2'/><text x='100' y='185' font-size='11' text-anchor='middle' fill='%238a7968' font-family='sans-serif'>[ スタッフ写真ここに配置 ]</text></svg>" alt="店長・女性スタッフ写真">
-      </div>
-      <div class="staff-info">
-        <span class="staff-tag">私たちが伺います！</span>
-        <h3 class="staff-name">店長・女性スタッフからご挨拶</h3>
-        <p class="staff-message">
-          「どんな人が来るんだろう…」という不安を少しでも和らげられるよう、当店では清潔な身だしなみ・丁寧な言葉遣い・笑顔での対応を徹底しております。男性スタッフだけのご訪問に不安がある一人暮らしの女性やシニアの方も、どうぞ安心してお任せください！
-        </p>
-        <div class="staff-commitments">
-          <span class="commitment-pill">✔ 非喫煙者のスタッフ</span>
-          <span class="commitment-pill">✔ 靴下は毎回新品に履き替え</span>
-          <span class="commitment-pill">✔ 明朗会計・親切丁寧</span>
-        </div>
-      </div>
+      <div class="img-placeholder staff-img">[スタッフ顔写真]</div>
+      <span class="staff-tag">清潔感・丁寧な言葉遣いを徹底</span>
+      <h3 class="staff-name">店長・女性スタッフ一同</h3>
+      <p class="staff-message">
+        「どんな人が来るんだろう…」というお客様の不安を解消するため、身だしなみのチェック、靴下の履き替え、丁寧な言葉遣いと笑顔でのご対応を徹底しております。男性スタッフだけのご訪問が不安な女性やシニアの方も、どうぞ安心してお任せください。
+      </p>
     </div>
   </section>
 
-  <!-- 4. 他社比較表 -->
+  <!-- 5. 他社との安心比較表 -->
   <section class="container" style="padding-top: 0;">
     <h2 class="section-title">他社との安心比較</h2>
     <p class="section-desc">クオリティと安心感で選ばれています</p>
@@ -642,7 +576,7 @@
     </div>
   </section>
 
-  <!-- 5. 明朗な料金メニュー -->
+  <!-- 6. 明朗な料金メニュー -->
   <div class="section-bg">
     <section class="container">
       <h2 class="section-title">明朗な料金メニュー</h2>
@@ -672,25 +606,20 @@
     </section>
   </div>
 
-  <!-- 【新規追加2】作業実績・ビフォーアフター写真枠 -->
+  <!-- 7. 作業実績・ビフォーアフター -->
   <section class="container">
     <h2 class="section-title">作業実績・ビフォーアフター</h2>
     <p class="section-desc">頼んだらここまで綺麗に！実際の施工事例です</p>
-
     <div class="ba-grid">
       <!-- 事例1 -->
       <div class="ba-card">
-        <div class="ba-card-title">不用品のお片付け・お部屋整理</div>
+        <div class="ba-card-title">不用品お片付け・お部屋整理</div>
         <div class="ba-photos">
-          <div class="photo-frame">
-            <span class="photo-label label-before">BEFORE</span>
-            <!-- 【画像差し替え箇所】Before写真（例: src="images/before1.jpg"） -->
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='225' viewBox='0 0 300 225'><rect width='100%' height='100%' fill='%23e8e1d7'/><path d='M135 95 h30 v10 h-30 z M130 105 h40 v30 h-40 z' fill='%23b8aa99'/><circle cx='150' cy='120' r='8' fill='%23e8e1d7'/><text x='150' y='160' font-size='12' text-anchor='middle' fill='%237a6b5c' font-family='sans-serif'>[ Before 写真枠 ]</text></svg>" alt="作業前写真">
+          <div>
+            <div class="img-placeholder ba-img">[Before]</div>
           </div>
-          <div class="photo-frame">
-            <span class="photo-label label-after">AFTER</span>
-            <!-- 【画像差し替え箇所】After写真（例: src="images/after1.jpg"） -->
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='225' viewBox='0 0 300 225'><rect width='100%' height='100%' fill='%23e8e1d7'/><path d='M135 95 h30 v10 h-30 z M130 105 h40 v30 h-40 z' fill='%23b8aa99'/><circle cx='150' cy='120' r='8' fill='%23e8e1d7'/><text x='150' y='160' font-size='12' text-anchor='middle' fill='%237a6b5c' font-family='sans-serif'>[ After 写真枠 ]</text></svg>" alt="作業後写真">
+          <div>
+            <div class="img-placeholder ba-img">[After]</div>
           </div>
         </div>
         <p class="ba-desc">散らかっていたお部屋も、作業時間約2時間ですっきり元通り。不用品の分別から搬出まで全て対応いたしました。</p>
@@ -702,17 +631,13 @@
 
       <!-- 事例2 -->
       <div class="ba-card">
-        <div class="ba-card-title">水回り・キッチンの深層クリーニング</div>
+        <div class="ba-card-title">水回り清掃・キッチンクリーニング</div>
         <div class="ba-photos">
-          <div class="photo-frame">
-            <span class="photo-label label-before">BEFORE</span>
-            <!-- 【画像差し替え箇所】Before写真（例: src="images/before2.jpg"） -->
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='225' viewBox='0 0 300 225'><rect width='100%' height='100%' fill='%23e8e1d7'/><path d='M135 95 h30 v10 h-30 z M130 105 h40 v30 h-40 z' fill='%23b8aa99'/><circle cx='150' cy='120' r='8' fill='%23e8e1d7'/><text x='150' y='160' font-size='12' text-anchor='middle' fill='%237a6b5c' font-family='sans-serif'>[ Before 写真枠 ]</text></svg>" alt="作業前写真">
+          <div>
+            <div class="img-placeholder ba-img">[Before]</div>
           </div>
-          <div class="photo-frame">
-            <span class="photo-label label-after">AFTER</span>
-            <!-- 【画像差し替え箇所】After写真（例: src="images/after2.jpg"） -->
-            <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='225' viewBox='0 0 300 225'><rect width='100%' height='100%' fill='%23e8e1d7'/><path d='M135 95 h30 v10 h-30 z M130 105 h40 v30 h-40 z' fill='%23b8aa99'/><circle cx='150' cy='120' r='8' fill='%23e8e1d7'/><text x='150' y='160' font-size='12' text-anchor='middle' fill='%237a6b5c' font-family='sans-serif'>[ After 写真枠 ]</text></svg>" alt="作業後写真">
+          <div>
+            <div class="img-placeholder ba-img">[After]</div>
           </div>
         </div>
         <p class="ba-desc">長年の油汚れや焦げ付きも、専用洗剤とプロの技術でピカピカに。清潔感のある明るいキッチンを取り戻しました。</p>
@@ -724,7 +649,7 @@
     </div>
   </section>
 
-  <!-- 6. リアルなお客様の声 -->
+  <!-- 8. リアルなお客様の声 -->
   <section class="container" style="padding-top: 0;">
     <h2 class="section-title">リアルなお客様の声</h2>
     <p class="section-desc">ご利用いただいたお客様からお喜びの声をいただいております</p>
@@ -754,7 +679,7 @@
     </div>
   </section>
 
-  <!-- 7. ご利用の流れ -->
+  <!-- 9. ごご利用の流れ -->
   <div class="section-bg">
     <section class="container">
       <h2 class="section-title">ご利用の流れ</h2>
@@ -783,7 +708,7 @@
     </section>
   </div>
 
-  <!-- 8. よくあるご質問 (FAQ) -->
+  <!-- 10. よくあるご質問 (FAQ) -->
   <section class="container">
     <h2 class="section-title">よくあるご質問</h2>
     <p class="section-desc">疑問や不安を事前に解消いたします</p>
@@ -809,7 +734,7 @@
     </div>
   </section>
 
-  <!-- 9. スマホ固定追従フッターバー -->
+  <!-- 11. スマホ固定追従フッターバー -->
   <div class="sticky-bar">
     <a href="https://line.me" target="_blank" style="background: var(--line-green); color: #ffffff;">LINEで簡単相談</a>
     <a href="tel:0120000000" style="background: var(--primary); color: #ffffff;">電話でお見積り</a>
