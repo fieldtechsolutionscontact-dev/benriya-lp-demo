@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -6,39 +7,44 @@
   <title>街のまごころ便利屋 | 女性・シニアも安心の地域密着サポート</title>
   <style>
     :root {
+      --bg-base: #fff8f0;
+      --bg-card: #ffffff;
       --primary: #f28b30;
-      --primary-light: #fff8f0;
       --primary-dark: #d97016;
-      --text-main: #333333;
-      --text-sub: #666666;
-      --accent: #e55353;
+      --primary-light: #fff3e6;
       --line-green: #06c755;
-      --bg-gray: #fbfbfb;
-      --card-border: #f0eae1;
+      --accent-red: #e55353;
+      --text-main: #2d2d2d;
+      --text-sub: #666666;
+      --border-color: #f0eae1;
     }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Sans", "Meiryo", sans-serif;
       color: var(--text-main);
-      background-color: var(--bg-gray);
+      background-color: var(--bg-base);
       line-height: 1.6;
-      padding-bottom: 70px;
+      padding-bottom: 75px;
     }
+
+    /* ヘッダー */
     header {
       background: #ffffff;
       padding: 12px 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid var(--card-border);
+      border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 0;
       z-index: 100;
     }
     .logo {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       font-weight: 700;
-      color: var(--primary);
+      color: var(--primary-dark);
       display: flex;
       align-items: center;
       gap: 6px;
@@ -50,11 +56,13 @@
       padding: 8px 14px;
       border-radius: 20px;
       font-weight: bold;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       box-shadow: 0 2px 4px rgba(6,199,85,0.2);
     }
+
+    /* ファーストビュー */
     .hero {
-      background: linear-gradient(180deg, var(--primary-light) 0%, #ffffff 100%);
+      background: linear-gradient(180deg, var(--primary-light) 0%, var(--bg-base) 100%);
       padding: 35px 20px 30px;
       text-align: center;
     }
@@ -62,7 +70,7 @@
       display: inline-block;
       background: #ffffff;
       border: 1px solid var(--primary);
-      color: var(--primary);
+      color: var(--primary-dark);
       padding: 4px 14px;
       border-radius: 20px;
       font-size: 0.8rem;
@@ -75,11 +83,14 @@
       margin-bottom: 12px;
       font-weight: 800;
     }
-    .hero h1 span { color: var(--primary); }
+    .hero h1 span { color: var(--primary-dark); }
     .hero p {
       color: var(--text-sub);
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       margin-bottom: 22px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .cta-container {
       display: flex;
@@ -96,14 +107,16 @@
       text-decoration: none;
       padding: 14px;
       border-radius: 30px;
-      font-size: 1rem;
+      font-size: 0.98rem;
       font-weight: bold;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.06);
       transition: opacity 0.2s;
     }
     .btn:hover { opacity: 0.9; }
     .btn-line { background: var(--line-green); color: #ffffff; }
     .btn-tel { background: var(--primary); color: #ffffff; }
+
+    /* コンテナ＆セクション共通 */
     .container {
       max-width: 760px;
       margin: 0 auto;
@@ -111,9 +124,10 @@
     }
     .section-title {
       text-align: center;
-      font-size: 1.35rem;
+      font-size: 1.3rem;
       font-weight: 700;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      color: var(--text-main);
     }
     .section-desc {
       text-align: center;
@@ -121,6 +135,8 @@
       color: var(--text-sub);
       margin-bottom: 25px;
     }
+
+    /* 3大安心カード */
     .grid-3 {
       display: grid;
       grid-template-columns: 1fr;
@@ -130,10 +146,10 @@
       .grid-3 { grid-template-columns: repeat(3, 1fr); }
     }
     .card {
-      background: #ffffff;
+      background: var(--bg-card);
       padding: 22px 18px;
       border-radius: 12px;
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-color);
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.02);
     }
@@ -146,7 +162,7 @@
       align-items: center;
       justify-content: center;
       margin: 0 auto 12px;
-      color: var(--primary);
+      color: var(--primary-dark);
     }
     .card h3 {
       font-size: 1.05rem;
@@ -158,18 +174,59 @@
       color: var(--text-sub);
       line-height: 1.5;
     }
-    .services-bg {
+
+    /* 他社比較表 */
+    .table-wrapper {
+      overflow-x: auto;
       background: #ffffff;
-      border-top: 1px solid var(--card-border);
-      border-bottom: 1px solid var(--card-border);
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+    }
+    table.compare-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+    table.compare-table th, table.compare-table td {
+      padding: 12px 8px;
+      border-bottom: 1px solid var(--border-color);
+      vertical-align: middle;
+    }
+    table.compare-table th {
+      background: #fdfbf7;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    table.compare-table th.highlight, table.compare-table td.highlight {
+      background: #fff3e6;
+      border-left: 2px solid var(--primary);
+      border-right: 2px solid var(--primary);
+      font-weight: 700;
+    }
+    table.compare-table th.highlight {
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+    .mark-good { color: var(--line-green); font-weight: bold; font-size: 1.1rem; }
+    .mark-fair { color: var(--primary); font-weight: bold; font-size: 1.1rem; }
+    .mark-bad { color: var(--accent-red); font-weight: bold; font-size: 1.1rem; }
+
+    /* 料金表 */
+    .section-bg {
+      background: #ffffff;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
     }
     .service-list {
       max-width: 600px;
       margin: 0 auto;
-      background: var(--bg-gray);
+      background: var(--bg-base);
       border-radius: 12px;
       padding: 10px 20px;
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-color);
     }
     .service-row {
       display: flex;
@@ -177,21 +234,55 @@
       align-items: center;
       padding: 14px 0;
       border-bottom: 1px dashed #dedede;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
     }
     .service-row:last-child { border-bottom: none; }
-    .service-name { font-weight: 500; }
     .service-price {
       font-weight: 700;
-      color: var(--accent);
+      color: var(--accent-red);
       font-size: 1.05rem;
     }
+
+    /* お客様の声 */
+    .voice-card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+    .voice-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .voice-badge {
+      background: var(--primary-light);
+      color: var(--primary-dark);
+      padding: 3px 10px;
+      border-radius: 15px;
+      font-size: 0.78rem;
+      font-weight: bold;
+    }
+    .voice-title {
+      font-weight: bold;
+      font-size: 0.92rem;
+    }
+    .voice-text {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* ご利用の流れ */
     .flow-step {
       display: flex;
       align-items: flex-start;
       gap: 15px;
       background: #ffffff;
-      border: 1px solid var(--card-border);
+      border: 1px solid var(--border-color);
       padding: 16px;
       border-radius: 10px;
       margin-bottom: 12px;
@@ -209,14 +300,49 @@
       justify-content: center;
       flex-shrink: 0;
     }
-    .step-content h4 {
-      font-size: 0.95rem;
-      margin-bottom: 4px;
+    .step-content h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .step-content p { font-size: 0.82rem; color: var(--text-sub); }
+
+    /* FAQ */
+    .faq-item {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 16px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border-color);
     }
-    .step-content p {
-      font-size: 0.8rem;
+    .faq-q {
+      font-weight: bold;
+      font-size: 0.92rem;
+      color: var(--primary-dark);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .faq-q-icon {
+      background: var(--primary);
+      color: #ffffff;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .faq-a {
+      font-size: 0.85rem;
       color: var(--text-sub);
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      padding-left: 30px;
     }
+
+    /* 追従フッターバー */
     .sticky-bar {
       position: fixed;
       bottom: 0;
@@ -236,14 +362,16 @@
       border-radius: 25px;
       text-decoration: none;
       font-weight: bold;
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+
     svg { fill: currentColor; }
   </style>
 </head>
-
 <body>
+
+  <!-- 1. ヘッダー -->
   <header>
     <div class="logo">
       <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2L2 12h3v8h6v-6h2v6h6v-8h3L12 2z"/></svg>
@@ -252,10 +380,11 @@
     <a href="#contact" class="header-btn">簡単お見積り</a>
   </header>
 
+  <!-- 2. ファーストビュー -->
   <section class="hero">
     <div class="badge">地域密着型 / 女性スタッフ在籍</div>
     <h1>お部屋の「困った」を<br><span>笑顔と安心</span>で即解決</h1>
-    <p>家具移動・お部屋のお掃除・不用品のお片付けまで。<br>女性の1人暮らしでも安心して頼める街のパートナーです。</p>
+    <p>「知らない人を家にあげるのが不安…」「追加料金が心配…」<br>そんなお悩みに寄り添う、女性・シニア層に優しい地域密着サービスです。</p>
     <div class="cta-container" id="contact">
       <a href="https://line.me" target="_blank" class="btn btn-line">
         <svg width="20" height="20" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 5.92 2 10.75c0 2.92 1.64 5.51 4.19 7.02l-.65 2.4c-.11.41.31.76.68.56l2.97-1.57c.89.26 1.83.4 2.81.4 5.52 0 10-3.92 10-8.76S17.52 2 12 2z"/></svg>
@@ -268,35 +397,81 @@
     </div>
   </section>
 
+  <!-- 3. 3大安心カード -->
   <section class="container">
     <h2 class="section-title">女性やシニアに選ばれる3つの安心</h2>
-    <p class="section-desc">「知らない人を家に上げるのが不安」という声を第一に考えました</p>
+    <p class="section-desc">一人暮らしの女性や高齢者の方でも安心してご利用いただけます</p>
     <div class="grid-3">
       <div class="card">
         <div class="card-icon">
           <svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
         </div>
         <h3>女性スタッフ同行OK</h3>
-        <p>男性だけの訪問がご不安な場合もご安心ください。女性スタッフが丁寧に寄り添います。</p>
+        <p>男性だけの訪問がご不安な場合もご安心ください。女性スタッフが丁寧に寄り添い対応します。</p>
       </div>
       <div class="card">
         <div class="card-icon">
           <svg width="26" height="26" viewBox="0 0 24 24"><path d="M11.8 10.9c-2.27-.59-3-1.2-3-2.15 0-1.09 1.01-1.85 2.7-1.85 1.78 0 2.44.85 2.5 2.1h2.21c-.07-1.72-1.12-3.3-3.21-3.81V3h-3v2.16c-1.94.42-3.5 1.68-3.5 3.61 0 2.31 1.91 3.46 4.7 4.13 2.5.6 3 1.48 3 2.41 0 .69-.49 1.79-2.7 1.79-2.06 0-2.87-.92-2.98-2.1h-2.2c.12 2.19 1.76 3.42 3.68 3.83V21h3v-2.15c1.95-.37 3.5-1.5 3.5-3.55 0-2.84-2.43-3.81-4.7-4.4z"/></svg>
         </div>
         <h3>追加料金なしの明朗会計</h3>
-        <p>作業前の見積もり以上の金額を請求することは一切ありません。明瞭な提示を徹底します。</p>
+        <p>事前にお提示したお見積もり以上の金額を当日請求することは一切ありません。</p>
       </div>
       <div class="card">
         <div class="card-icon">
           <svg width="26" height="26" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
         </div>
         <h3>損害保険に完全加入</h3>
-        <p>万が一のお部屋のキズや器物破損にも万全の体制。最大1億円までの補償で安心です。</p>
+        <p>万が一のお部屋のキズや家具の破損にも万全の補償体制（最大1億円）を備えています。</p>
       </div>
     </div>
   </section>
 
-  <div class="services-bg">
+  <!-- 4. 他社比較表 -->
+  <section class="container" style="padding-top: 0;">
+    <h2 class="section-title">他社との安心比較</h2>
+    <p class="section-desc">クオリティと安心感で選ばれています</p>
+    <div class="table-wrapper">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>比較項目</th>
+            <th class="highlight">当店</th>
+            <th>大手マッチング</th>
+            <th>一般便利屋</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>女性スタッフ同行</td>
+            <td class="highlight"><span class="mark-good">◎</span><br>無料対応</td>
+            <td><span class="mark-fair">△</span><br>指名不可・有料</td>
+            <td><span class="mark-bad">×</span><br>不可</td>
+          </tr>
+          <tr>
+            <td>出張費・見積もり</td>
+            <td class="highlight"><span class="mark-good">◎</span><br>完全無料</td>
+            <td><span class="mark-fair">△</span><br>有料の場合あり</td>
+            <td><span class="mark-fair">△</span><br>別途見積り</td>
+          </tr>
+          <tr>
+            <td>キャンセル料</td>
+            <td class="highlight"><span class="mark-good">◎</span><br>作業前無料</td>
+            <td><span class="mark-bad">×</span><br>前日から発生</td>
+            <td><span class="mark-fair">△</span><br>規約による</td>
+          </tr>
+          <tr>
+            <td>損害保険加入</td>
+            <td class="highlight"><span class="mark-good">◎</span><br>全件1億円補償</td>
+            <td><span class="mark-fair">△</span><br>業者任せ</td>
+            <td><span class="mark-bad">×</span><br>未加入の場合あり</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 5. 明朗な料金メニュー -->
+  <div class="section-bg">
     <section class="container">
       <h2 class="section-title">明朗な料金メニュー</h2>
       <p class="section-desc">どんな小さなお困りごとでもお気軽にご相談ください</p>
@@ -325,35 +500,97 @@
     </section>
   </div>
 
+  <!-- 6. リアルなお客様の声 -->
   <section class="container">
-    <h2 class="section-title">ご利用の流れ</h2>
-    <p class="section-desc">スマホ1つで即日完了します</p>
-    <div class="flow-step">
-      <div class="step-num">1</div>
-      <div class="step-content">
-        <h4>LINEまたはお電話で無料相談</h4>
-        <p>困っている場所の写真をLINEで送るだけで、概算の見積もりがすぐ出ます。</p>
+    <h2 class="section-title">リアルなお客様の声</h2>
+    <p class="section-desc">ご利用いただいたお客様からお喜びの声をいただいております</p>
+
+    <div class="voice-card">
+      <div class="voice-header">
+        <span class="voice-badge">20代女性 / 一人暮らし</span>
+        <span class="voice-title">不用品処分</span>
       </div>
+      <p class="voice-text">「男性スタッフだけだと不安でしたが、女性スタッフさんが笑顔で同行してくれて安心して任せられました。」</p>
     </div>
-    <div class="flow-step">
-      <div class="step-num">2</div>
-      <div class="step-content">
-        <h4>日時決定・訪問作業</h4>
-        <p>女性スタッフの同行希望などもこの時点でお気軽にお申し付けいただけます。</p>
+
+    <div class="voice-card">
+      <div class="voice-header">
+        <span class="voice-badge">30代女性 / 主婦</span>
+        <span class="voice-title">家具組み立て</span>
       </div>
+      <p class="voice-text">「LINEで写真を送った段階で正確な金額を教えてもらい、当日の追加料金も一切ありませんでした。」</p>
     </div>
-    <div class="flow-step">
-      <div class="step-num">3</div>
-      <div class="step-content">
-        <h4>作業完了・ご確認・お支払い</h4>
-        <p>作業終了後に仕上がりをご確認いただき、現金・各種キャッシュレスでお支払い。</p>
+
+    <div class="voice-card">
+      <div class="voice-header">
+        <span class="voice-badge">60代女性 / シニア</span>
+        <span class="voice-title">草むしり・電球交換</span>
       </div>
+      <p class="voice-text">「電話対応がとても丁寧で、重いゴミ袋も全部運んでくれて本当に助かりました。」</p>
     </div>
   </section>
 
+  <!-- 7. ご利用の流れ -->
+  <div class="section-bg">
+    <section class="container">
+      <h2 class="section-title">ご利用の流れ</h2>
+      <p class="section-desc">カンタン3ステップで即日対応いたします</p>
+      <div class="flow-step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>LINEまたは電話で無料相談</h4>
+          <p>お困りごとの内容や写真をお送りいただくだけで、すぐにお見積もりをお出しします。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>日時決定・訪問作業</h4>
+          <p>ご希望の日時に訪問します。女性スタッフ同行のご希望もお気軽にお申し付けください。</p>
+        </div>
+      </div>
+      <div class="flow-step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>作業完了・ご確認・お支払い</h4>
+          <p>作業結果をご確認いただき、問題がなければお支払いとなります。</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- 8. よくあるご質問 (FAQ) -->
+  <section class="container">
+    <h2 class="section-title">よくあるご質問</h2>
+    <p class="section-desc">疑問や不安を事前に解消いたします</p>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-icon">Q</span>本当に女性スタッフに来てもらえますか？</div>
+      <div class="faq-a">はい、ご予約時にお申し付けいただければ女性スタッフが必ず同行・対応いたします。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-icon">Q</span>見積もり後にお断りしても大丈夫ですか？</div>
+      <div class="faq-a">もちろん大丈夫です。金額にご納得いただけない場合のキャンセル料は一切かかりません。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-icon">Q</span>作業中はずっと立ち会う必要がありますか？</div>
+      <div class="faq-a">開始時と終了時のご確認のみ立ち会っていただければ、作業中はお部屋でおくつろぎいただいて構いません。</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q"><span class="faq-q-icon">Q</span>支払い方法は何が使えますか？</div>
+      <div class="faq-a">現金のほか、各種クレジットカード、PayPay等のQRコード決済に対応しております。</div>
+    </div>
+  </section>
+
+  <!-- 9. スマホ固定追従フッターバー -->
   <div class="sticky-bar">
     <a href="https://line.me" target="_blank" style="background: var(--line-green); color: #ffffff;">LINEで簡単相談</a>
     <a href="tel:0120000000" style="background: var(--primary); color: #ffffff;">電話でお見積り</a>
   </div>
+
 </body>
 </html>
+```
