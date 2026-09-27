@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>画像アップロード対応・リアルタイムLP生成エディタ</title>
+  <title>画像アップロード対応・リアルタイムLP生成エディタ（体験版）</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -226,7 +226,7 @@
   <!-- 左ペイン：設定フォーム -->
   <div id="editor-pane">
     <div id="editor-header">
-      <span>LP生成エディタ（画像対応）</span>
+      <span>LP生成エディタ（体験版）</span>
       <span style="font-size:0.75rem; font-weight:normal; opacity:0.8;">リアルタイム自動連動</span>
     </div>
     <div id="editor-form">
@@ -1301,18 +1301,9 @@
       doc.close();
     }
 
-    // index.htmlの直接保存
+    // 無料デモ版（GitHub Pages）の保存ボタンの処理
     function downloadLP() {
-      const htmlContent = generateLP();
-      const blob = new Blob([htmlContent], { type: 'text/html;charset=utf-8;' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = 'index.html';
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      alert('【体験版プレビュー】\n\nリアルタイム連動をお試しいただきありがとうございます。\n自店用としてそのまま使える完成版HTMLの書き出し・保存機能は、note有料版パッケージにて提供しております。');
     }
 
     // フォーム入力変更のリアルタイム検知
